@@ -27,9 +27,8 @@
                     height = 480;
 
                 var projection = d3.geo.albersUsa()
-                    .scale(100)
+                    .scale(1000)
                     .translate([width / 2, height / 2])
-                    .precision(0.1);
                 var path = d3.geo.path()
                     .projection(projection);
                 var graticule = d3.geo.graticule()
