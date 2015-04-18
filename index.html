@@ -26,7 +26,7 @@
                 var width = 960,
                     height = 480;
 
-                var projection = d3.geo.equirectangular()
+                var projection = d3.geo.albersUsa()
                     .scale(100)
                     .translate([width / 2, height / 2])
                     .precision(0.1);
@@ -41,7 +41,7 @@
                     .datum(graticule)
                     .attr("class", "graticule")
                     .attr("d", path);
-                d3.json("USA.json", function(error, us) {
+                d3.json("/d/4090846/us.json", function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
                         .attr("class", "land")
