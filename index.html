@@ -11,17 +11,26 @@
                 //Insert D3 Code Here
             var width = 960,
                 height = 500;
-            var dataset = []
-            d3.csv("data.csv", function(data) {
-                    dataset = data.map(function(d) { return [ +d["BEGIN_LAT"], d+["BEGIN_LON"] ]; });
-            })
             
-            var map = d3.geomap.choropleth()
-                .geofile('USA.json')
-                .projection(d3.geo.albersUsa)
-                .unitId('fips')
+            var projection = d3.geo.albers()
                 .scale(1000)
-                .legend(true)
+                .translate([width / 2, height / 1])
+                .precision(0.1);
+            
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+            function ready(error, us) {
+                svg.append("path")
+                    .datum(topojson.feature(us, us.objects.land))
+                    .attr("class", "land")
+                    .attr("d", path);
+                svg.append("path")
+                    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+                    .attr("class", "states")
+                    .attr("d", path);
+
+            }
             </script>
             Oh, hello.
         </body>
