@@ -4,20 +4,18 @@
         <meta charset="utf-8">
         <title>D3 Test</title>
         <style>
-            .graticule {
-                fill: none;
-                stroke: #777;
-                stroke-width: .5px;
-                stroke-opacity: .5;
-            }
             .land {
                 fill: #222;
             }
-
-            .boundary {
+            
+            .county-boundary {
                 fill: none;
                 stroke: #fff;
                 stroke-width: 0.5px;
+            }
+            .state-boundary {
+                fill: none:
+                stroke: #fff;
             }
         </style>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -43,14 +41,18 @@
                     .datum(graticule)
                     .attr("class", "graticule")
                     .attr("d", path);
-                d3.csv("data.csv", function(error, world) {
+                d3.json("USA.json", function(error, us) {
                     svg.insert("path", ".graticule")
-                        .datum(topojson.feature(world, world.objects.land))
+                        .datum(topojson.feature(us, us.objects.land))
                         .attr("class", "land")
                         .attr("d", path);
                     svg.insert("path", ".graticule")
-                        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-                        .attr("class", "boundary")
+                        .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
+                        .attr("class", "county-boundary")
+                        .attr("d", path);
+                    svg.insert("path", ".graticule")
+                        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+                        .attr("class", "state-boundary")
                         .attr("d", path);
                     });
                 d3.select(self.frameElement).style("height", height + "px");
