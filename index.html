@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        </head>
+        <body>
+            <script type="text/javascript">
+                //Insert D3 Code Here
+            var width = 960,
+                height = 500;
+            var dataset = []
+            d3.csv("data.csv", function(data) {
+                    dataset = data.map(function(d) { return [ +d["BEGIN_LAT"], d+["BEGIN_LON"] ]; });
+                    console.log(dataset)
+            })
+            </script>
+        </body>
+</html>
