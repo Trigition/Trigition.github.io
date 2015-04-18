@@ -19,11 +19,13 @@
                 .precision(0.1);
 
             var path = d3.geo.path()
-                .projection(projection)
+                .projection(projection);
+
             var svg = d3.select("body").append("svg")
                 .attr("width", width)
                 .attr("height", height);
-            d3.json("USA.json", function(error, topo) {
+                
+            d3.json("us.json", function(error, topo) {
                 states = topojson.feature(topo, topo.objects.states).features
                 //Set Projection Param
                 projection
