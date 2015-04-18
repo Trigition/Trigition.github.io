@@ -41,7 +41,7 @@
                     .datum(graticule)
                     .attr("class", "graticule")
                     .attr("d", path);
-                d3.json("/d/4090846/us.json", function(error, us) {
+                d3.json("us.json", function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
                         .attr("class", "land")
