@@ -13,24 +13,21 @@
             var width = 960,
                 height = 500;
             
-            var projection = d3.geo.albers()
-                .scale(1000)
-                .translate([width / 2, height / 1])
-                .precision(0.1);
+            var projection = d3.geo.albers();
 
             var path = d3.geo.path()
                 .projection(projection);
 
-            var svg = d3.select("body").append("svg")
-                .attr("width", width)
-                .attr("height", height);
-                
             d3.json("us.json", function(error, topo) {
                 states = topojson.feature(topo, topo.objects.states).features
                 //Set Projection Param
                 projection
                     .attr("width", width)
                     .attr("height", height);
+                var svg = d3.select("body").append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+                    
                 //Test Points
                 aa = [-122.1, 37.2];
                 bb = [-122.3, 37.3];
