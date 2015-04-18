@@ -5,6 +5,7 @@
         <title>D3 Test</title>
         <link rel="stylesheet" type="text/css" href="main.css">
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>
         </head>
         <body>
             <script type="text/javascript">
@@ -16,21 +17,40 @@
                 .scale(1000)
                 .translate([width / 2, height / 1])
                 .precision(0.1);
-            
+
+            var path = d3.geo.path()
+                .projection(projection)
             var svg = d3.select("body").append("svg")
                 .attr("width", width)
                 .attr("height", height);
-            function ready(error, us) {
-                svg.append("path")
-                    .datum(topojson.feature(us, us.objects.land))
-                    .attr("class", "land")
+            d3.json("USA.json", function(error, topo) {
+                states = topojson.feature(topo, topo.objects.states).features
+                //Set Projection Param
+                projection
+                    .attr("width", width)
+                    .attr("height", height);
+                //Test Points
+                aa = [-122.1, 37.2];
+                bb = [-122.3, 37.3];
+                //Add states
+                svg.selectAll("path")
+                    .data(states).enter()
+                    .append("path")
+                    .attr("class", "feature")
+                    .style("fill", "steelblue")
                     .attr("d", path);
                 svg.append("path")
-                    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                    .attr("class", "states")
+                    .datum(topojson.mesh(topo, topo.objects.states, function(a, b) { return a !== b; }))
+                    .attr("class", "mesh")
                     .attr("d", path);
-
-            }
+                svg.selectAll("circle")
+                    .data([aa,bb]).ender()
+                    .append("circle")
+                    .attr("cx", function(d) { return projection(d)[0]; })
+                    .attr("cy", function(d) { return projection(d)[1]; })
+                    .attr("r", "8px")
+                    .attr("fill", "red")
+            });
             </script>
             Oh, hello.
         </body>
