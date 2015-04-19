@@ -45,6 +45,7 @@
                 Papa.parse("data.csv", {
                     header: true,
                     step: function (results, parser) {
+                        console.log("Hello")
                         console.log(results)
                         coordinates.push({Longitude : results['BEGIN_LON'], Latitude : results['BEGIN_LAT']});
                     }})
