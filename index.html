@@ -63,7 +63,8 @@
             });
 			d3.csv("data.csv", function(error, data) {
 				console.log(data[0])
-           		g.selectAll("circle")
+           		console.log(data[0].BEGIN_LAT)
+				g.selectAll("circle")
 					.data(data)
 					.enter()
 					.append("circle")
