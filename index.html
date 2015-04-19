@@ -5,7 +5,7 @@
         <title>D3 Test</title>
         <style>
             .land {
-                fill: #222;
+                fill: #444;
             }
             
             .county-boundary {
@@ -44,8 +44,7 @@
                 
             var coordinates = []
             d3.csv("data.csv", function(data) {
-                    console.log(data)
-                    console.log("aaaah")
+                    console.log(data["BEGIN_LON")
                     coordinates = data.map(function(d) { return [ +d["BEGIN_LON"], +d["BEGIN_LAT"] ]; });
             });
             console.log(coordinates)
