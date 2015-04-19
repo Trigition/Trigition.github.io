@@ -61,15 +61,15 @@
                         });
             });
 			d3.csv("data.csv", function(error, data) {
-           		/*data.forEach(function(d) {
-					coordinates.push({Longitude: d["BEGIN_LON"], Latitude : d["BEGIN_LAT"]})
-				})*/
+           		data.forEach(function(d) {
+					console.log(d)
+				})
 				svg.selectAll("circle")
 					.data(data)
 					.enter()
 					.append("circle")
 					.attr("cx", function(d) {
-						console.log(projection([ d["BEGIN_LON"], d["BEGIN_LAT"] ]));
+						//console.log(projection([ d["BEGIN_LON"], d["BEGIN_LAT"] ]));
 						return projection([+d["BEGIN_LON"], +d["BEGIN_LAT"]])[0];
 					})
 					.attr("cy", function(d) {
