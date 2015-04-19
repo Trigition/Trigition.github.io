@@ -43,27 +43,9 @@
                 .attr("height", height);
                 
             var coordinates = []
-            /*
-            function handlerFileSelect(evt) {
-                var file = evt.target.files[0];
-                Papa.parse(file, {
-                    header: true,
-                    step: function (results, parser) {
-                        console.log("Hello")
-                        console.log(results)
-                        coordinates.push({Longitude : results['BEGIN_LON'], Latitude : results['BEGIN_LAT']});
-                    }});
-                    }*/
-            var file = $.get("data.csv", function(f) {
-                console.log("File loaded :D");
+            d3.csv("data.csv", function(data) {
+                    coordinates = data.map(function(d) { return [ +d["BEGIN_LON"], +d["BEGIN_LAT"] ]; });
             });
-            Papa.parse(file, {
-                header: true,
-                step: function (results, parser) {
-                    console.log("Hello")
-                    console.log(results)
-                    coordinates.push({Longitude : results['BEGIN_LON'], Latitude: results['BEGIN_LAT']});
-            }});
             console.log(coordinates)
             d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
