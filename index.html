@@ -24,58 +24,65 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://d3js.org/topojson.v1.min.js"></script>
         <script src="papaparse.min.js"></script>
+        <script src="jquery-2.1.3.min.map"></script>
         </head>
         <body>
         <script type="text/javascript">
-                var file = files[0];
-                var width = 960,
-                    height = 480;
+            var width = 960,
+                height = 480;
 
-                var projection = d3.geo.albersUsa()
-                    .scale(1000)
-                    .translate([width / 2, height / 2]);
-                var path = d3.geo.path()
-                    .projection(projection);
-                var graticule = d3.geo.graticule()
+            var projection = d3.geo.albersUsa()
+                .scale(1000)
+                .translate([width / 2, height / 2]);
+            var path = d3.geo.path()
+                .projection(projection);
+            var graticule = d3.geo.graticule()
 
-                var svg = d3.select("body").append("svg")
-                    .attr("width", width)
-                    .attr("height", height);
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
                 
-                var coordinates = []
-                Papa.parse("data.csv", {
+            var coordinates = []
+            
+            function handlerFileSelect(evt) {
+                var file = evt.target.files[0];
+                Papa.parse(file, {
                     header: true,
                     step: function (results, parser) {
                         console.log("Hello")
                         console.log(results)
                         coordinates.push({Longitude : results['BEGIN_LON'], Latitude : results['BEGIN_LAT']});
-                    }})
-                console.log(coordinates)
-                d3.json(file, function(error, us) {
-                    svg.insert("path", ".graticule")
-                        .datum(topojson.feature(us, us.objects.land))
-                        .attr("class", "land")
-                        .attr("d", path);
-                    svg.insert("path", ".graticule")
-                        .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
-                        .attr("class", "county-boundary")
-                        .attr("d", path);
-                    svg.selectAll(".pin")
-                        .data(coordinates)
-                        .enter().append("circle", ".pin")
-                        .attr("r", 5)
-                        .attr("transform", function(d) {
-                            return "translate(" + projection([
-                                    d.Longitude + "," +
-                                    d.Latitude]) + ")"
+                    }});
+            }
+            console.log(coordinates)
+            d3.json(file, function(error, us) {
+                svg.insert("path", ".graticule")
+                    .datum(topojson.feature(us, us.objects.land))
+                    .attr("class", "land")
+                    .attr("d", path);
+                 svg.insert("path", ".graticule")
+                    .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
+                    .attr("class", "county-boundary")
+                    .attr("d", path);
+                svg.selectAll(".pin")
+                    .data(coordinates)
+                    .enter().append("circle", ".pin")
+                    .attr("r", 5)
+                    .attr("transform", function(d) {
+                        return "translate(" + projection([
+                                        d.Longitude + "," +
+                                        d.Latitude]) + ")"
                         });
                         
                     /*svg.insert("path", ".graticule")
                         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
                         .attr("class", "state-boundary")
                         .attr("d", path);*/
-                });
-                d3.select(self.frameElement).style("height", height + "px");
+            });
+            d3.select(self.frameElement).style("height", height + "px");
+            $(document).ready(function() {
+                $("#csv-file").change(handlerFileSelect);
+            });
             </script>
             <input type="file" id="data.csv" name="files"/>
             Oh, hello.
