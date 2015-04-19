@@ -44,6 +44,7 @@
                 
             var coordinates = []
             d3.csv("data.csv", function(data) {
+                    print data
                     coordinates = data.map(function(d) { return [ +d["BEGIN_LON"], +d["BEGIN_LAT"] ]; });
             });
             console.log(coordinates)
