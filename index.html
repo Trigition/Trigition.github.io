@@ -44,9 +44,11 @@
             var rawdata;
             var coordinates = [];
             d3.csv("data.csv", function(error, data) {
-                    rawdata = data
+           		data.forEach(function(d) {
+					console.log("An entry")	
+				})
             });
-            console.log(rawdata)
+			
             d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
                     .datum(topojson.feature(us, us.objects.land))
