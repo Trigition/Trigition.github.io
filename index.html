@@ -41,6 +41,8 @@
                     .attr("height", height);
                 
                 function extractCoordinates(inLongitude, inLatitude, list) {
+                    console.log(inLongitude)
+                    console.log(inLatitude)
                     for (i = 1; i < 10; i++) {
                         list.push({longitude: inLongitude[i], latitude: inLatitude[i]});
                     }
