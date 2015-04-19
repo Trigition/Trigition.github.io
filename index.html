@@ -55,7 +55,7 @@
                     }});
             }
             console.log(coordinates)
-            d3.json(file, function(error, us) {
+            d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
                     .datum(topojson.feature(us, us.objects.land))
                     .attr("class", "land")
