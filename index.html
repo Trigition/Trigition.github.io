@@ -27,7 +27,7 @@
         </head>
         <body>
         <script type="text/javascript">
-                var files[0];
+                var file = files[0];
                 var width = 960,
                     height = 480;
 
@@ -51,7 +51,7 @@
                         coordinates.push({Longitude : results['BEGIN_LON'], Latitude : results['BEGIN_LAT']});
                     }})
                 console.log(coordinates)
-                d3.json("us.json", function(error, us) {
+                d3.json(file, function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
                         .attr("class", "land")
