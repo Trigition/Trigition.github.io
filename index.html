@@ -63,7 +63,7 @@
                     console.log("Hello")
                     console.log(results)
                     coordinates.push({Longitude : results['BEGIN_LON'], Latitude: results['BEGIN_LAT']});
-            }}
+            }});
             console.log(coordinates)
             d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
