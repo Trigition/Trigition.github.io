@@ -45,7 +45,8 @@
             var coordinates = []
             d3.csv("data.csv", function(data) {
                     //console.log(data)
-                    coordinates = data.map(function(d) { return [ d.BEGIN_LON, d.BEGIN_LAT ]; });
+                    //coordinates = data.map(function(d) { return [ d.BEGIN_LON, d.BEGIN_LAT ]; });
+                            
             });
             console.log(coordinates)
             d3.json("us.json", function(error, us) {
