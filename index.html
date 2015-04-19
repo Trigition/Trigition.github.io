@@ -17,6 +17,9 @@
                 fill: none:
                 stroke: #fff;
             }
+            .glyph {
+                fill: #000;
+            }
         </style>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -36,9 +39,8 @@
                 var svg = d3.select("body").append("svg")
                     .attr("width", width)
                     .attr("height", height);
-                //Data
-                var data = d3.csv("data.csv")
-                    
+                
+                var data = d3.csv("data.csv")    
                 d3.json("us.json", function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
@@ -48,11 +50,21 @@
                         .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
                         .attr("class", "county-boundary")
                         .attr("d", path);
+                    svg.selectAll(".pin")
+                        .data(data)
+                        .enter().append("circle", ".pin")
+                        .attr("r", 5)
+                        .attr("transform", function(d) {
+                            return "translate(" + projection([
+                                    d['BEGIN_LON'],
+                                    d['BEGIN_LAT']
+                            ]) + ")"
+                        });
                     /*svg.insert("path", ".graticule")
                         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
                         .attr("class", "state-boundary")
                         .attr("d", path);*/
-                    });
+                });
                 d3.select(self.frameElement).style("height", height + "px");
             </script>
             Oh, hello.
