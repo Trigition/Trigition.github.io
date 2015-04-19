@@ -62,6 +62,7 @@
                         });
             });
 			d3.csv("data.csv", function(error, data) {
+				console.log(data)
            		g.selectAll("circle")
 					.data(data)
 					.enter()
