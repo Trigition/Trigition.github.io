@@ -57,6 +57,13 @@
             var file = $.get("data.csv", function(f) {
                 console.log("File loaded :D");
             });
+            Papa.parse(file, {
+                header: true,
+                step: function (results, parser) {
+                    console.log("Hello")
+                    console.log(results)
+                    coordinates.push({Longitude : results['BEGIN_LON'], Latitude: results['BEGIN_LAT']});
+            }}
             console.log(coordinates)
             d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
