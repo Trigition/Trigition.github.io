@@ -23,6 +23,7 @@
         </style>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://d3js.org/topojson.v1.min.js"></script>
+        <script src="papaparse.min.js"></script>
         </head>
         <body>
             <script type="text/javascript">
@@ -40,16 +41,13 @@
                     .attr("width", width)
                     .attr("height", height);
                 
-                function extractCoordinates(inLongitude, inLatitude, list) {
-                    console.log(inLongitude)
-                    console.log(inLatitude)
-                    for (i = 1; i < 10; i++) {
-                        list.push({longitude: inLongitude[i], latitude: inLatitude[i]});
-                    }
-                }
                 var coordinates = []
-                var data = d3.csv("data.csv")
-                extractCoordinates(data['BEGIN_LON'], data['BEGIN_LAT'], coordinates)
+                Papa.parse("data.csv", {
+                    header: true,
+                    step: function (results, parser) {
+                        coordinates.push({Longitude : results['BEGIN_LON'], Latitude : results['BEGIN_LAT']})
+                    }})
+                
                 d3.json("us.json", function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
