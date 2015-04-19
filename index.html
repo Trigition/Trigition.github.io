@@ -58,7 +58,7 @@
                         .attr("class", "county-boundary")
                         .attr("d", path);
                     svg.selectAll("circle")
-                        .data(cooridinates).enter()
+                        .data(coordinates).enter()
                         .append("path")
                         .attr("cx", function(d) { return projection[0]; })
                         .attr("cy", function(d) { return projection[1]; })
