@@ -41,8 +41,6 @@
                 .attr("width", width)
                 .attr("height", height);
             var coordinates = [];
-
-			console.log(coordinates)
 			d3.json("us.json", function(error, us) {
             	svg.insert("path", ".graticule")
                     .datum(topojson.feature(us, us.objects.land))
@@ -61,16 +59,12 @@
                                         d.Longitude + "," +
                                         d.Latitude]) + ")"
                         });
-                        
-                    /*svg.insert("path", ".graticule")
-                        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                        .attr("class", "state-boundary")
-                        .attr("d", path);*/
             });
 			d3.csv("data.csv", function(error, data) {
            		data.forEach(function(d) {
 					coordinates.push({Longitude: d["BEGIN_LON"], Latitude : d["BEGIN_LAT"]})
 				})
+				console.log(coordinates)
 				svg.selectAll("circle")
 					.data(coordinates)
 					.enter()
