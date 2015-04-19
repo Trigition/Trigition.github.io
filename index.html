@@ -48,10 +48,10 @@
 					//console.log(d["BEGIN_LAT"])
 					coordinates.push({Longitude: d["BEGIN_LON"], Latitude : d["BEGIN_LAT"]})
 				})
+				console.log("Coordinates")
+				console.log(coordinates)
             });
-			console.log("Coordinates")
-			console.log(coordinates)
-            d3.json("us.json", function(error, us) {
+			    d3.json("us.json", function(error, us) {
                 svg.insert("path", ".graticule")
                     .datum(topojson.feature(us, us.objects.land))
                     .attr("class", "land")
