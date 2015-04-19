@@ -40,8 +40,14 @@
                     .attr("width", width)
                     .attr("height", height);
                 
+                function extractCoordinates(inLongitude, inLatitude, list) {
+                    for (i = 0; i < inLongitude.length; i++) {
+                        list.push({longitude: inLongitude[i], latitude: inLatitude[i]});
+                    }
+                }
+                var coordinates = []
                 var data = d3.csv("data.csv")
-                var coordinates = data['BEGIN_LON'], data['BEGIN_LAT']
+                extractCoordinates(data['BEGIN_LON'], data['BEGIN_LAT'], coordinates)
                 d3.json("us.json", function(error, us) {
                     svg.insert("path", ".graticule")
                         .datum(topojson.feature(us, us.objects.land))
