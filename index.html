@@ -52,7 +52,6 @@
                     .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
                     .attr("class", "county-boundary")
                     .attr("d", path);
-			});
 			d3.csv("data.csv", function(error, data) {
 				//console.log(data[0])
            		//console.log(data[0].BEGIN_LAT)
@@ -77,6 +76,7 @@
 					})
 					.attr("r", 10)
 					.style("fill", "red");
+			});
 			});
             //d3.select(self.frameElement).style("height", height + "px");
             </script>
