@@ -11,8 +11,9 @@
     fill: none:
     stroke: #fff;
 }
-.glyph {
+circle {
     fill: #000;
+    stroke: #999;
 }
 
 html, body {

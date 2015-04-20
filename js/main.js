@@ -44,10 +44,12 @@ d3.json("us.json", function(error, us) {
             })
             .attr("r", function(d) {
                 var magnitude = d.DAMAGE_PROPERTY
-                console.log(magnitude)
+                if (magnitude < 1)
+                    return 1;
+                //console.log(magnitude)
                 return magnitude;
             })
-            .style("fill", "red")
+            //.style("fill", "red")
             .style("opacity", 0.5);
     });
     g.insert("path", ".graticule")
