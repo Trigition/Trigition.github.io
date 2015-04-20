@@ -1,5 +1,13 @@
 var width = 960,
     height = 480;
+var month = ["01","02","03","04","05","06","07","08","09","10","11","12"],
+    columns = [],
+    curFrame = 0,
+    interval,
+    frameLength = 500,
+    isPlaying = false,
+    sliderMargin = 65;
+var dateScale, sliderScale, slider;
 
 var projection = d3.geo.albersUsa()
     .scale(1000)
