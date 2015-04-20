@@ -55,3 +55,11 @@ d3.json("us.json", function(error, us) {
         .attr("class", "county-boundary")
         .attr("d", path);
 });
+
+
+
+function splitMonthYear(line) {
+    var year = line.substring(0,4);
+    var month = line.substring(4);
+    return[month, year];
+}
