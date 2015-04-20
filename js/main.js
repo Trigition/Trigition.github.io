@@ -60,11 +60,11 @@ d3.json("us-10m.json", function(error, us) {
         .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
         .attr("class", "county-boundary")
         .attr("d", path);*/
-    /*g.insert("path", ".graticule")
+    g.insert("path", ".graticule")
         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
         .attr("class", "state-boundary")
         .attr("vector-effect", "non-scaling-stroke")
-        .attr("d", path);*/
+        .attr("d", path);
 });
 
 function splitMonthYear(line) {
