@@ -23,7 +23,7 @@ var map = g.append("g")
     .attr("id", "map")
 var coordinates = [];
 			
-d3.json("us.json", function(error, us) {
+d3.json("/d/4090846/us.json", function(error, us) {
     d3.csv("data.csv", function(error, data) {
         g.selectAll("circle")
             .data(data)
