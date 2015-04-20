@@ -63,7 +63,7 @@ d3.json("us.json", function(error, us) {
         .attr("class", "county-boundary")
         .attr("d", path);*/
     g.insert("path", ".graticule")
-        .datum(topojson.feature(us, us.objects.states) function(a, b) {
+        .datum(topojson.mesh(us, us.objects.states, function(a, b) {
             return a !== b;
         })
         .attr("class", "state-boundary")
