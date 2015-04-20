@@ -56,10 +56,19 @@ d3.json("us.json", function(error, us) {
         .datum(topojson.feature(us, us.objects.land))
         .attr("class", "land")
         .attr("d", path);
-    g.insert("path", ".graticule")
+    /*g.insert("path", ".graticule")
         .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
         .attr("class", "county-boundary")
-        .attr("d", path);
+        .attr("d", path);*/
+    g.append("g")
+        .attr("class", "states-bundle")
+        .selectAll("path")
+        .data(us)
+        .enter()
+        .append(path)
+        .attr("d", path)
+        .attr("stroke", "white")
+        .attr("class", "states");
 });
 
 function splitMonthYear(line) {
