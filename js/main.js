@@ -21,7 +21,7 @@ var svg = d3.select("body").append("svg")
 var g = svg.append("g");
 var coordinates = [];
 			
-d3.json("us.json", function(error, us) {
+d3.json("us-10m.json", function(error, us) {
     d3.csv("data.csv", function(error, data) {
         g.selectAll("circle")
             .data(data)
