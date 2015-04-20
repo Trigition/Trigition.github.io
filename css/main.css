@@ -12,7 +12,7 @@
     stroke: #fff;
 }
 circle {
-    fill: #000;
+    fill: "red";
     stroke: #999;
 }
 
