@@ -30,19 +30,23 @@ d3.json("us.json", function(error, us) {
             .attr("cx", function(d) {
                 console.log(d)
                 var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
-                    if (coor !== null)
-                        return coor[0];
-				    else
-					    return 0.0
+                if (coor !== null)
+                    return coor[0];
+				else
+					return 0.0
 			})
             .attr("cy", function(d) {
-            var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
-            if (coor !== null)
-                return coor[1]
-            else
-                return 0.0
+                var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
+                if (coor !== null)
+                    return coor[1]
+                else
+                    return 0.0
             })
-            .attr("r", 10)
+            .attr("r", function(d) {
+                var magnitude = d.DAMAGE_PROPERTY
+                magnitude = magnitude / 1000000
+                return magnitude;
+            })
             .style("fill", "red")
             .style("opacity", 0.5);
     });
@@ -55,8 +59,6 @@ d3.json("us.json", function(error, us) {
         .attr("class", "county-boundary")
         .attr("d", path);
 });
-
-
 
 function splitMonthYear(line) {
     var year = line.substring(0,4);
