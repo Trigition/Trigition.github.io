@@ -73,6 +73,7 @@
 						return projection([d.BEGIN_LON, d.BEGIN_LAT])[0];
 					})
 					.attr("cy", function(d) {
+						console.log(d)
 						return projection([d.BEGIN_LON, d.BEGIN_LAT])[1];
 					})
 					.attr("r", 10)
