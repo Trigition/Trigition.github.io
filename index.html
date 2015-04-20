@@ -62,13 +62,14 @@
                         });
             });
 			d3.csv("data.csv", function(error, data) {
-				console.log(data[0])
-           		console.log(data[0].BEGIN_LAT)
+				//console.log(data[0])
+           		//console.log(data[0].BEGIN_LAT)
 				g.selectAll("circle")
 					.data(data)
 					.enter()
 					.append("circle")
 					.attr("cx", function(d) {
+						console.log(d)
 						return projection([d.BEGIN_LON, d.BEGIN_LAT])[0];
 					})
 					.attr("cy", function(d) {
