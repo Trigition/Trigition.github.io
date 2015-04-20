@@ -70,9 +70,7 @@
 					.append("circle")
 					.attr("cx", function(d) {
 						console.log(d)
-					if ( projection([d.BEGIN_LON, d.BEGIN_LAT]) !== null ) {
-						return projection([d.BEGIN_LON, d.BEGIN_LAT])[0]
-					}
+						return projection([d.BEGIN_LON, d.BEGIN_LAT])[0];
 					})
 					.attr("cy", function(d) {
 						console.log(d)
