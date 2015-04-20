@@ -14,3 +14,12 @@
 .glyph {
     fill: #000;
 }
+
+html, body {
+    margin: 0px;
+    font: 14px/16px "Helvetica Neua", Helvetica, Arial, sans-serif;
+}
+
+#container {
+    min-width: 960px;
+}
