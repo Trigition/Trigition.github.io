@@ -71,12 +71,18 @@
 					.attr("cx", function(d) {
 						console.log(d)
 						var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
-						return coor[0]
+						if (coor !== null)
+							return coor[0];
+						else
+							return 0.0
 					})
 					.attr("cy", function(d) {
 						//console.log(d)
 						var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
-						return coor[1]
+						if (coor !== null)
+							return coor[1]
+						else
+							return 0.0
 					})
 					.attr("r", 10)
 					.style("fill", "red");
