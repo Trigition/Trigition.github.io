@@ -59,7 +59,7 @@
                         return "translate(" + projection([
                                         d.Longitude + "," +
                                         d.Latitude]) + ")"
-                        });
+                        })
 				d3.csv("data.csv", function(error, data) {
 					//console.log(data[0])
            			//console.log(data[0].BEGIN_LAT)
@@ -84,7 +84,7 @@
 						})
 						.attr("r", 10)
 						.style("fill", "red");
-				})
+				});
 			});
             d3.select(self.frameElement).style("height", height + "px");
             </script>
