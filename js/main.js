@@ -28,7 +28,7 @@ d3.json("us.json", function(error, us) {
             .enter()
             .append("circle")
             .attr("cx", function(d) {
-                console.log(d)
+                //console.log(d)
                 var coor = projection([d.BEGIN_LON, d.BEGIN_LAT])
                 if (coor !== null)
                     return coor[0];
@@ -44,6 +44,7 @@ d3.json("us.json", function(error, us) {
             })
             .attr("r", function(d) {
                 var magnitude = d.DAMAGE_PROPERTY
+                console.log(magnitude)
                 return magnitude;
             })
             .style("fill", "red")
