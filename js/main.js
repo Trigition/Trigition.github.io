@@ -14,7 +14,7 @@ var projection = d3.geo.albersUsa()
     .translate([width / 2, height / 2]);
 var path = d3.geo.path()
     .projection(projection);
-var graticule = d3.geo.graticule();
+//var graticule = d3.geo.graticule();
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -63,7 +63,7 @@ d3.json("us-10m.json", function(error, us) {
     g.insert("path", ".graticule")
         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
         .attr("class", "state-boundary")
-        .attr("vector-effect", "non-scaling-stroke")
+            //.attr("vector-effect", "non-scaling-stroke")
         .attr("d", path);
 });
 
