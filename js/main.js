@@ -43,7 +43,7 @@ d3.json("us.json", function(error, us) {
                     return 0.0
             })
             .attr("r", function(d) {
-                var magnitude = d.DAMAGE_PROPERTY
+                //var magnitude = d.DAMAGE_PROPERTY
                 //magnitude = Math.LN10(magnitude)
                 return 5;
             })
