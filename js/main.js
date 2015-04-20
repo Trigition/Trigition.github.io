@@ -44,7 +44,7 @@ d3.json("us.json", function(error, us) {
             })
             .attr("r", function(d) {
                 var magnitude = d.DAMAGE_PROPERTY
-                magnitude = magnitude / 1000000
+                magnitude = Math.LN10(magnitude)
                 return magnitude;
             })
             .style("fill", "red")
