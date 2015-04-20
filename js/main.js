@@ -19,8 +19,6 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 var g = svg.append("g");
-var map = g.append("g")
-    .attr("id", "map")
 var coordinates = [];
 			
 d3.json("us.json", function(error, us) {
@@ -62,11 +60,11 @@ d3.json("us.json", function(error, us) {
         .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
         .attr("class", "county-boundary")
         .attr("d", path);*/
-    g.insert("path", ".graticule")
+    /*g.insert("path", ".graticule")
         .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
         .attr("class", "state-boundary")
         .attr("vector-effect", "non-scaling-stroke")
-        .attr("d", path);
+        .attr("d", path);*/
 });
 
 function splitMonthYear(line) {
