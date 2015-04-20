@@ -36,7 +36,7 @@ d3.json("us.json", function(error, us) {
             })
             .attr("r", 10)
             .style("fill", "red")
-            .style("opacity", 0.75);
+            .style("opacity", 0.5);
     });
     g.insert("path", ".graticule")
         .datum(topojson.feature(us, us.objects.land))
