@@ -1,11 +1,11 @@
 .land {
-    fill: #777;
+    fill: #f7f7f7;
+	stroke: #ccc;
 }
                   
 .county-boundary {
-    fill: none;
-    stroke: #fff;
-    stroke-width: .5px;
+  fill: #f7f7f7;
+  stroke: #ccc;
 }
 .state-boundary {
     fill: none:
@@ -25,3 +25,60 @@ html, body {
 #container {
     min-width: 960px;
 }
+
+#slider-container, #date {
+	display: inline-block;
+	verticle-align: middle;
+	margin-top: 20px;
+}
+/*
+#date {
+	padding: 3px 0 3px 10px;
+	margin-left: 60px;
+	color: #333;
+}
+
+#date p {
+	margin: 0;
+}
+#date p:first-child {
+	color: #999;
+	font-size: 12px;
+	line-height: 13px;
+}
+#date p#month {
+	font-size: 30px;
+	line-height 30px;
+}
+#date p#month span{
+	float:left;
+	width: 2.55em;
+}
+*/
+
+#slider-container {
+	position: relative;
+}
+#slider-div {
+}
+
+#slider-probe {
+	position: absolute;
+	top: -20px;
+	font-size: 12px;
+	width: 70px;
+	margin-left: -35px;
+	display: none;	
+}
+/*
+#slider-probe p {
+	margin: 0;
+	width: 100%
+	text-align: center;
+	height: 15px;	
+}
+
+#slider-probe div {
+	height: 15px;
+	margin-left: 35px;	
+}*/
