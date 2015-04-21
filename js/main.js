@@ -67,6 +67,15 @@ d3.json("us-10m.json", function(error, us) {
         .attr("d", path);
 });
 
+/*
+ *Generate Slider for animation
+ */
+function generateSlider() {
+    var val ? slider()
+        .scale(10);
+    //Associate slider with CSS classes
+    d3.select("#slider-dev").remove();
+}
 function splitMonthYear(line) {
     var year = line.substring(0,4);
     var month = line.substring(4);
