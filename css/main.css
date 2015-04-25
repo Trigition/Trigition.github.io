@@ -31,6 +31,11 @@ html, body {
 	verticle-align: middle;
 	margin-top: 20px;
 }
+
+#play-button {
+	verticle-align: middle;	
+}
+
 /*
 #date {
 	padding: 3px 0 3px 10px;

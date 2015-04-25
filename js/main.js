@@ -75,10 +75,49 @@ d3.json("us-10m.json", function(error, us) {
 });
 
 /*
+ * Play through animation
+ */
+function play() {
+	totalFrames = getMaxTimeIndex(orderedColumns);
+	interval = setInterval( function() {
+		curFrame++;
+		//Find and update slider bar to reference current frame
+		console.log(curFrame, totalFrames)
+		d3.select("#slider-div .d3-slider-handle")
+			.style("left", (100 * curFrame / totalFrames) + "%");
+		slider.value(curFrame);
+		//If being played when slider is at end, restart animation
+		if ( curFrame == totalFrames )
+			curFrame = 0;
+		drawGlyphs(curFrame)		
+		//Stop Animation when there is no more data to display
+		if ( curFrame == totalFrames - 1 )
+			return;	
+	}, 100)
+}
+
+/*
+ * This function handles when the Play Button is played
+ */
+function buttonPlayPress() {
+	if (isPlaying == true) {
+		document.getElementById("playButton").value = "Play Animation";
+		clearInterval(interval);
+		isPlaying = false;
+		return;	
+	}
+	else {
+		document.getElementById("playButton").value = "Pause";
+		isPlaying = true;
+		play();
+	}
+	
+}
+
+/*
  * Animation definition for circles
  */
 function drawGlyphs(index) {
-	console.log(index)
 	var circle = d3.selectAll("circle");
 	circle
 		.transition()
@@ -87,7 +126,7 @@ function drawGlyphs(index) {
 			if (d.TIME_INDEX == index) {
 				return 0.75;	
 			} else if(d.TIME_INDEX < index) {
-				return 0.2	
+				return 0.1;	
 			}
 			return 0.0;
 		})
@@ -121,8 +160,9 @@ function generateSlider() {
 				.scale(500)
 				.tickFormat(function(d) {
 					var date = splitMonthYear(d);
-					return months[date[0]] + " " + date[1];
-				})		
+					//return months[date[0]] + " " + date[1];
+					return "\'" + date[1]; 
+				})
 		);
  
 	//Associate slider with CSS classes	
