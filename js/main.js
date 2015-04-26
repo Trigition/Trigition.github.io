@@ -8,6 +8,7 @@ var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov",
     frameLength = 500,
     isPlaying = false,
     sliderMargin = 65;
+	
 var dateScale, sliderScale, slider;
 
 var projection = d3.geo.albersUsa()
@@ -15,13 +16,21 @@ var projection = d3.geo.albersUsa()
     .translate([width / 2, height / 2]);
 var path = d3.geo.path()
     .projection(projection);
-//var graticule = d3.geo.graticule();
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 var g = svg.append("g");
 var coordinates = [];
-			
+
+/*
+ * This function maps 2 ranges of values to another set of values
+ */
+Number.prototype.map = function(inMax, inMin, outMax, outMin) {
+	var val = ( this - inMin ) * ( outMax - outMin ) / ( inMax - inMin ) + outMin;
+	return Math.floor(val);
+}
+
+
 d3.json("us-10m.json", function(error, us) {
     d3.csv("data.csv", function(error, data) {
 		//orderedColumns.push(data.TIME_INDEX);
@@ -60,6 +69,7 @@ d3.json("us-10m.json", function(error, us) {
 		//console.log(orderedColumns);
 		dateScale = createDataScale(orderedColumns);
 		generateSlider();
+		updateDateText(0);
     });
 	//Draw Map Components
     g.insert("path", ".graticule")
@@ -82,7 +92,6 @@ function play() {
 	interval = setInterval( function() {
 		curFrame++;
 		//Find and update slider bar to reference current frame
-		console.log(curFrame, totalFrames)
 		d3.select("#slider-div .d3-slider-handle")
 			.style("left", (100 * curFrame / totalFrames) + "%");
 		slider.value(curFrame);
@@ -117,7 +126,7 @@ function buttonPlayPress() {
 /*
  * Animation definition for circles
  */
-function drawGlyphs(index) {
+function drawGlyphs(index) { 
 	var circle = d3.selectAll("circle");
 	circle
 		.transition()
@@ -131,8 +140,22 @@ function drawGlyphs(index) {
 			return 0.0;
 		})
 	//Update Web Text
+	updateDateText(index);
+}
+
+/*
+ * Updates Date HTML text
+ */
+function updateDateText(index) {
+	//Update Date Values
 	var date = splitMonthYear(index);
-	d3.select("#date p#month").html(months[date[1]]);
+	document.getElementById("timeLabel").innerHTML = months[date[0]] + " " + (date[1] + 1900);
+	var winter = 0xd3e1ff;
+	var summer = 0xfc913a;
+	var colorMap = date[0].map(1, 12, winter, summer)
+	console.log(colorMap.toString(16));
+	//document.getElementById("timeLabel").style.color = "#" + colorMap.toString(16)
+	//document.getElementById("timeLabel").style.color = "red";
 }
 
 /*
