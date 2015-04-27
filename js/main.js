@@ -1,5 +1,11 @@
 var width = 960,
     height = 480;
+	
+var timeOffset = 0; //This offsets the data collection to January 1996
+var margin = {top: -5, right: -5, bottom: -5, left: -5},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
 var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     columns = [],
 	orderedColumns = [],
@@ -7,6 +13,7 @@ var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov",
     interval,
     frameLength = 500,
     isPlaying = false,
+	shouldColor = true,
     sliderMargin = 65;
 	
 var dateScale, sliderScale, slider;
@@ -14,13 +21,22 @@ var dateScale, sliderScale, slider;
 var projection = d3.geo.albersUsa()
     .scale(1000)
     .translate([width / 2, height / 2]);
+
 var path = d3.geo.path()
     .projection(projection);
+
+var zoomBehavior = d3.behavior.zoom()
+	.scaleExtent([1,10])
+	.on("zoom", zoomFunc);
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+	.attr("transform", "translate(" + margin.left + "," + margin.right + ")")
+	.call(zoomBehavior);
+
 var g = svg.append("g");
-var coordinates = [];
+
 
 /*
  * This function maps 2 ranges of values to another set of values
@@ -32,7 +48,7 @@ Number.prototype.map = function(inMax, inMin, outMax, outMin) {
 
 
 d3.json("us-10m.json", function(error, us) {
-    d3.csv("data.csv", function(error, data) {
+    d3.csv("data.csv?v=4", function(error, data) {
 		//orderedColumns.push(data.TIME_INDEX);
 		//console.log(orderedColumns);
         g.selectAll("circle")
@@ -59,12 +75,27 @@ d3.json("us-10m.json", function(error, us) {
                 if (magnitude < 1)
                     return 1;
                 //console.log(magnitude)
-                return magnitude;
+                return Math.log10(magnitude);
             })
             .attr("time_index", function(d) {
-				return d.TIME_INDEX;	
+				return d.TIME_INDEX - timeOffset;	
 			})
-            .style("opacity", 0);
+            .style("opacity", 0)
+			.style("fill", function(d) {
+				var type = parseInt(d.TYPE);
+				switch(type) {
+				case 0:
+					return "red";
+				case 1:
+					return "#67a9cf";
+				case 2:
+					return "yellow";
+				case 3:
+					return "gray";
+				default:
+					return "blue";	
+				}
+			})
 		//Generate sliders	
 		//console.log(orderedColumns);
 		dateScale = createDataScale(orderedColumns);
@@ -76,11 +107,6 @@ d3.json("us-10m.json", function(error, us) {
         .datum(topojson.feature(us, us.objects.land))
         .attr("class", "land")
         .attr("d", path);
-    /*g.append("path")
-        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-        .attr("class", "state-boundary")
-        .attr("d", path);*/
-	//Generate sliders
 
 });
 
@@ -131,13 +157,21 @@ function drawGlyphs(index) {
 	circle
 		.transition()
 		.style("opacity", function(d) {
-			//console.log("Check: ", d.TIME_INDEX, ">", index)
-			if (d.TIME_INDEX == index) {
+			if (d.TIME_INDEX == index - timeOffset) {
 				return 0.75;	
-			} else if(d.TIME_INDEX < index) {
+			} else if(d.TIME_INDEX < index - 30) {
+				return 0.1;	
+			} else if (d.TIME_INDEX < index) {
 				return 0.1;	
 			}
 			return 0.0;
+		})
+		.style("stroke", function(d) {
+			if(d.TIME_INDEX == index) {
+				return "#000";	
+			} else if (d.TIME_INDEX < index) {
+				return "#67a9cf";	
+			}
 		})
 	//Update Web Text
 	updateDateText(index);
@@ -153,7 +187,6 @@ function updateDateText(index) {
 	var winter = 0xd3e1ff;
 	var summer = 0xfc913a;
 	var colorMap = date[0].map(1, 12, winter, summer)
-	console.log(colorMap.toString(16));
 	//document.getElementById("timeLabel").style.color = "#" + colorMap.toString(16)
 	//document.getElementById("timeLabel").style.color = "red";
 }
@@ -183,8 +216,8 @@ function generateSlider() {
 				.scale(500)
 				.tickFormat(function(d) {
 					var date = splitMonthYear(d);
-					//return months[date[0]] + " " + date[1];
-					return "\'" + date[1]; 
+					var dateString = String(date[1]);
+					return "\'" + dateString.substr(dateString.length - 2); 
 				})
 		);
  
@@ -227,7 +260,15 @@ function sliderBar() {
 }
 
 function splitMonthYear(index) {
-    var year = Math.floor(index / 12) + 50;
+    var year = Math.floor(index / 12) + 96;
 	var month = index % 12;
     return[month, year];
+}
+
+/*
+ * Function allows for zooming behavior
+ * 
+ */
+function zoomFunc() {
+	g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
