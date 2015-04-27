@@ -32,6 +32,27 @@ html, body {
 	margin-top: 20px;
 }
 
+#legend {
+	font-family: sans-serif;
+	font-weight: bolder;	
+}
+
+#Cyclone {
+	color: #F00;	
+}
+
+#Precipitation {
+	color: #67a9cf;	
+}
+
+#Wind {
+	color: #FF0;
+}
+
+#Other {
+	color: #0C0;	
+}
+
 #play-button {
 	verticle-align: middle;	
 }
@@ -41,31 +62,6 @@ html, body {
 	font-size: 36px;
 	font-weight: bolder;	
 }
-
-/*
-#date {
-	padding: 3px 0 3px 10px;
-	margin-left: 60px;
-	color: #333;
-}
-
-#date p {
-	margin: 0;
-}
-#date p:first-child {
-	color: #999;
-	font-size: 12px;
-	line-height: 13px;
-}
-#date p#month {
-	font-size: 30px;
-	line-height 30px;
-}
-#date p#month span{
-	float:left;
-	width: 2.55em;
-}
-*/
 
 #slider-container {
 	position: relative;
@@ -81,15 +77,3 @@ html, body {
 	margin-left: -35px;
 	display: none;	
 }
-/*
-#slider-probe p {
-	margin: 0;
-	width: 100%
-	text-align: center;
-	height: 15px;	
-}
-
-#slider-probe div {
-	height: 15px;
-	margin-left: 35px;	
-}*/

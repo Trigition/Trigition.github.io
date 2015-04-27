@@ -7,6 +7,7 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5},
     height = 500 - margin.top - margin.bottom;
 
 var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+	categories = ["Cyclonic", "Precipitation", "Wind", "Other"],
     columns = [],
 	orderedColumns = [],
     curFrame = 0,
@@ -97,10 +98,10 @@ d3.json("us-10m.json", function(error, us) {
 				}
 			})
 		//Generate sliders	
-		//console.log(orderedColumns);
 		dateScale = createDataScale(orderedColumns);
 		generateSlider();
 		updateDateText(0);
+		//Generate Legend
     });
 	//Draw Map Components
     g.insert("path", ".graticule")
