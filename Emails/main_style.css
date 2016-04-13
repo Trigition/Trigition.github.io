@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+
+.emmaBody {
+    font-family: "Roboto Mono";
+    margin: auto;
+}
+
+.emmaMessageHeader {
+    width: 400px;
+    height: 100px;
+    position: relative;
+    font-family: "Roboto Mono";
+    margin: auto;
+}
+
+.emmaMessage {
+    width: 500px;
+    height: 850px;
+    position: relative;
+    margin: auto;
+}
+
+.ps {
+    width: 500px;
+    height: 200px;
+    position: relative;
+    margin: auto;
+    padding: 20px;
+}
