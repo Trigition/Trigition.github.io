@@ -1,0 +1,44 @@
+//output:conway.html
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title Conway's Game of Life
+        meta(name="viewport" content="width=device-width,initial-scale=1")
+        link(rel="stylesheet" href="complex_adapt.min.css")
+    
+    body
+        h1 Conway's Game of Life
+        h3 A Cellular Automata Model
+        .maincontent
+            p. 
+                Conway's Game of Life is a classical example of Complex Adaptive Systems.
+                This "game" has no players, instead it's more accurate to label it as a 
+                simulation where the observer (being you) creates the initial conditions.
+                The rules to the game are simple.
+            h4 The Rules
+            .rules
+                ul
+                    li A cell remains alive if it has 2 or 3 alive neighbors.
+                    li A cell dies if it has less than 2 alive neighbors.
+                    li A cell dies if it has more than 3 alive neighbors.
+                    li A dead cell becomes alive again if it has exactly 3 alive neighbors.
+            p.
+                These are the only rules that govern the cells' behavior. The only 
+                other restrictions are the size of the environment and how space is
+                represented. In the example code below, the space is a torus, meaning
+                it wraps left, right, up, and down.
+            p.
+                From initial conditions, sometimes the model may continue forever.
+                On other instances, the model may "die" leaving no cells viable or
+                the model may remain still, with a few cells being active. However,
+                upon executing the example below one can see obvious patterns arise.
+                There is an excellent listing of automata patterns on wikipedia 
+                #[a(href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns" target="_newtab") here]
+            .netlogoCode
+                iframe(width="800", 
+                    height="800", 
+                    scrolling="yes", 
+                    frameborder="no", 
+                    src="NetlogoCode/GameOfLife.html")
+            

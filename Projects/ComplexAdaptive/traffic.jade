@@ -1,0 +1,44 @@
+//output:traffic.html
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title Traffic Jams
+        meta(name="viewport" content="width=device-width,initial-scale=1")
+        link(rel="stylesheet" href="complex_adapt.min.css")
+
+    body
+        h1 Traffic Modelling
+        h3 A Practical Use of Complex Systems
+        .maincontent
+            p. 
+                Everybody hates traffic #[sup Citation Needed]. But this 
+                annoying pattern can be modelled using complex systems. By
+                representing cars and traffic lights as their own entities, we 
+                can show how the environment (road topology) and timing can cause
+                immensly different outcomes.
+            h4 The Cars
+            p.
+                The cars follow rules that every (responsible) driver will follow.
+                They will not collide with another car. They will only pass an
+                intersection when the light is green. This is the only behavior
+                governing the cars.
+            h4 The Lights
+            p.
+                The traffic lights act a little smarter than a timed traffic light.
+                They change their status according to the number of cars waiting in
+                line. A single traffic light is not concerned with the status
+                of neighboring intersections. A traffic light is only considering
+                the cars waiting on its own signal.
+            h4 Powerloss
+            p.
+                This model include the option to cause a power-loss to the network,
+                forcing everyone to treat the intersection as a 4-way stop. With this
+                option enabled, we can see how the average wait time for every car 
+                starts to climb.
+            .netlogoCode
+                iframe(width="800", 
+                    height="800", 
+                    scrolling="yes", 
+                    frameborder="no", 
+                    src="NetlogoCode/TrafficGrid.html")

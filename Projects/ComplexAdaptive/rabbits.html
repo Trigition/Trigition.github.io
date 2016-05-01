@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Delta Flocking</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="complex_adapt.min.css">
+  </head>
+  <body>
+    <h1>Flocking</h1>
+    <h3>How Simple Rules Lead to Complex Behavior</h3>
+    <div class="maincontent">
+      <p>
+        Complex Adaptive Systems often include ecological models. In this
+        example the system is a model of rabbits eating grass. The rabbits
+        must eat the grass in order to survive and reproduce.
+      </p>
+      <h4>The Rabbits</h4>
+      <p>
+        In this model the rabbits have energy. If this energy count
+        reaches 0, the rabbit dies. However, if this energy reaches a 
+        certain threshold, the rabbit reproduces and creates another rabbit.
+      </p>
+      <p>
+        If the rabbit is on a patch of grass, it consumes the grass and
+        gains energy. However the patch of grass is removed and the rabbit
+        must move in order to eat more grass. This movement requires energy,
+        and so the rabbit will starve if it cannot find new grass.
+      </p>
+      <h4>The Grass</h4>
+      <p>
+        The grass naturally regenerates at a specified rate. And each
+        grass patch produces a specified amount of energy. Playing with
+        the example model below will quickly demonstrate how these
+        two inputs alone can greatly impact the outcome of the model.
+      </p>
+      <h4>The Weeds</h4>
+      <p>
+        While not activated in the default options (the observer must
+        specify if weeds are to be a part of the model), weeds act as a
+        competitor to the grass. By default they do not provide the rabbits
+        any energy and may outcompete the grass in terms of territory. This
+        simple addition of another competitor adds another layer of complexity
+        to the model.
+      </p>
+      <div class="netlogoCode">
+        <iframe width="800" height="800" scrolling="yes" frameborder="no" src="NetlogoCode/RabbitsGrassWeeds.html"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
